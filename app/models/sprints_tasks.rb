@@ -8,7 +8,7 @@ class SprintsTasks < Issue
   def self.get_tasks_by_status(project, status, sprint, user)
     projects = []
     tasks = []
-    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id].each{[proj| projects << proj.id}
+    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
     cond = ["issues.project_id in (?) and status_id = ?", projects, status]
     unless sprint.nil?
       if sprint == 'null'
@@ -31,7 +31,7 @@ class SprintsTasks < Issue
   def self.get_tasks_by_sprint(project, sprint)
     projects = []
     tasks = []
-    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id].each{[proj| projects << proj.id}
+    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
     cond = ["project_id in (?) and is_closed = ?", projects, false]
     unless sprint.nil?
       if sprint == 'null'
